@@ -7,21 +7,21 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed } from "vue";
+import { defineComponent, ref, computed } from 'vue'
 
 export default defineComponent({
-  name: "HelloWorld",
+  name: 'HelloWorld',
   props: {
-    msg: String,
+    msg: String
   },
-  setup({ msg }) {
-    const year = ref(2020);
-    const result = computed(() => msg + "123");
+  setup(props) {
+    const year = ref(2020)
+    const result = computed(() => props.msg + '123')
 
     return {
       year,
-      result,
-    };
-  },
-});
+      result
+    }
+  }
+})
 </script>
