@@ -17,22 +17,23 @@
 
 <script lang="ts">
 import { defineComponent, reactive } from 'vue'
+import { useRouter } from 'vue-router'
+import { ElMessage } from 'element-plus'
 
 export default defineComponent({
   name: 'Login',
-  data() {
-    return {
-      model: {}
-    }
-  },
   setup() {
+    const router = useRouter()
+
     const loginForm = reactive({
       username: 'admin',
       password: '123456'
     })
 
     const handleLogin = () => {
-      console.log(loginForm)
+      sessionStorage.token = '123'
+      router.push('/')
+      ElMessage.success('登录成功')
     }
 
     return {
