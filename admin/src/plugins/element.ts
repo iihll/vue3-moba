@@ -11,14 +11,20 @@ import {
   ElMenuItemGroup
 } from 'element-plus'
 
+const components = [
+  ElAside,
+  ElContainer,
+  ElHeader,
+  ElMain,
+  ElButton,
+  ElMenu,
+  ElMenuItem,
+  ElSubmenu,
+  ElMenuItemGroup
+]
+
 export default (app: App): void => {
-  app.use(ElAside)
-  app.use(ElContainer)
-  app.use(ElHeader)
-  app.use(ElMain)
-  app.use(ElButton)
-  app.use(ElMenu)
-  app.use(ElMenuItem)
-  app.use(ElSubmenu)
-  app.use(ElMenuItemGroup)
+  components.forEach((component) => {
+    app.use(component)
+  })
 }

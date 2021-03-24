@@ -6,8 +6,8 @@ import element from '@/plugins/element'
 import '@/assets/less/style.less'
 
 const app = createApp(App)
-// 添加 element 组件
-element(app)
 app.use(store)
 app.use(router)
+// 添加 element 组件
+element(app)
 app.mount('#app')
