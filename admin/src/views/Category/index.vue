@@ -6,10 +6,7 @@
     <el-table-column prop="name" label="名称"></el-table-column>
     <el-table-column label="操作">
       <template v-slot="{ row }">
-        <el-button
-          type="warning"
-          size="mini"
-          @click="handleEdit(row)"
+        <el-button type="warning" size="mini" @click="handleEdit(row)"
           >编辑</el-button
         >
         <el-button type="danger" size="mini" @click="handleDel(row)"
@@ -22,7 +19,12 @@
     <el-form @submit.prevent="save" label-width="120px" :model="formData">
       <el-form-item label="上级分类">
         <el-select v-model="formData.parent">
-          <el-option v-for="item in parents" :key="item._id" :label="item.name" :value="item._id"></el-option>
+          <el-option
+            v-for="item in parents"
+            :key="item._id"
+            :label="item.name"
+            :value="item._id"
+          ></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="名称">
@@ -37,20 +39,49 @@
 
 <script>
 import { defineComponent, ref, reactive } from 'vue'
+import {
+  getCategory,
+  getCategoryParents,
+  putCategory,
+  postCategory
+} from '@/api'
 
 export default defineComponent({
   name: 'Category',
+  props: {
+    id: {}
+  },
   setup() {
+    const parents = reactive([])
+
+    async function fetchParents() {
+      const { data } = await getCategoryParents().catch(error => {
+        console.log(error)
+      })
+
+      parents = data
+    }
+
     const dialogVisible = ref(false)
 
     const tableData = reactive([])
 
-    const formData = reactive({})
+    const formData = reactive({
+      name: '',
+      parent: ''
+    })
+
+    const handleDel = () => {}
+    const handleEdit = () => {}
+    const save = () => {}
 
     return {
       dialogVisible,
       tableData,
-      formData
+      formData,
+      handleDel,
+      handleEdit,
+      save
     }
   }
 })
