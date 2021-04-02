@@ -9,5 +9,9 @@ module.exports = app => {
     next()
   })
 
+  router.post('/login', async (ctx, next) => {
+
+  })
+
   app.use(router.routes())
 }

@@ -9,5 +9,6 @@ app.use(async ctx => {
   ctx.body = { foo: 'bar' }
 })
 
+require('./plugins/db')(app)
 
 app.listen(3000)
