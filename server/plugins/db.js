@@ -1,25 +1,31 @@
-const mysql = require('mysql2')
+const { createPool } = require('mysql2')
 
-module.exports = app => {
+const pool = createPool({
+  connectionLimit: 10,
+  host: 'localhost',
+  user: 'root',
+  password: '12345678',
+  database: 'moba'
+})
 
-  const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'xdq971102.',
-    database: 'moba'
+const query = (sql, values) => {
+  return new Promise((resolve, reject) => {
+    pool.getConnection((err, connection) => {
+      if(err) {
+        reject(err)
+      } else {
+        connection.query(sql, values, (err, result) => {
+          if(err) {
+            reject(err)
+          } else {
+            resolve(result)
+          }
+
+          connection.release()
+        })
+      }
+    })
   })
-  
-  connection.connect(err => {
-    if(err) {
-      console.error(err)
-    } else {
-      console.log('success')
-    }
-  })
-
-  // connection.query('create database moba', (err, result, fields) => {
-  //   if(err) throw err
-  //   console.log(result)
-  // })
-
 }
+
+module.exports = query

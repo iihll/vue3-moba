@@ -5,7 +5,7 @@ const router = new Router()
 
 module.exports = app => {
   router.post('/', async (ctx, next) => {
-    ctx.body
+    ctx.body = 'test'
     next()
   })
 
